@@ -22,12 +22,11 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  asdf
   dotenv
   git
   vscode
   yarn
-
-  # External plugins.
   zsh-autosuggestions
   zsh-completions
   zsh-syntax-highlighting
