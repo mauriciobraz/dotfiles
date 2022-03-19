@@ -1,6 +1,15 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# Install Oh My Zsh if it isn't already present
+if [ ! -d $ZSH ]; then
+  echo "Cloning Oh My Zsh..."
+  git clone https://github.com/ohmyzsh/ohmyzsh.git $ZSH
+
+  echo "Oh My Zsh cloned, now reopen your terminal to finish the installation."
+  exit
+fi
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -13,7 +22,15 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  dotenv git vscode yarn zsh-syntax-highlighting
+  dotenv
+  git
+  vscode
+  yarn
+
+  # External plugins.
+  zsh-autosuggestions
+  zsh-completions
+  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -40,14 +57,17 @@ source $NVM_DIR/nvm.sh &>/dev/null || {
 
 source $NVM_DIR/bash_completion
 
-# Install ZShell Package Manager (ZPM)
-# https://github.com/zpm-zsh/zpm
-export ZPM_DIR="$HOME/.zpm"
+# Install all the external plugins used by oh-my-zsh.
+# TODO -> Migrate to zinit.
+function install-omz-plugins {
+  PLUGINS_DIR=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins
 
-source $ZPM_DIR/zpm.zsh &>/dev/null || {
-  git clone https://github.com/zpm-zsh/zpm.git $ZPM_DIR
-  source $ZPM_DIR/zpm.zsh
+  git clone https://github.com/zsh-users/zsh-autosuggestions \
+    $PLUGINS_DIR/zsh-autosuggestions
+
+  git clone https://github.com/zsh-users/zsh-completions \
+    $PLUGINS_DIR/plugins/zsh-completions
+
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+    $PLUGINS_DIR/zsh-syntax-highlighting
 }
-
-zpm load \
-  zsh-users/zsh-autosuggestions,zsh-completions
