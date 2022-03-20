@@ -65,7 +65,7 @@ function install-omz-plugins {
     $PLUGINS_DIR/zsh-autosuggestions
 
   git clone https://github.com/zsh-users/zsh-completions \
-    $PLUGINS_DIR/plugins/zsh-completions
+    $PLUGINS_DIR/zsh-completions
 
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
     $PLUGINS_DIR/zsh-syntax-highlighting
