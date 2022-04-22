@@ -25,6 +25,7 @@ plugins=(
   asdf
   dotenv
   git
+  pnpm
   vscode
   yarn
   zsh-autosuggestions
@@ -35,6 +36,11 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+# Aliases
+#
+# It requires to install the commitizen-cli (npm i -g commitizen)
+alias gcz="git cz"
 
 # Optional tools, you don't need to install them, if you don't want to.
 #
@@ -60,6 +66,9 @@ source $NVM_DIR/bash_completion
 # TODO -> Migrate to zinit.
 function install-omz-plugins {
   PLUGINS_DIR=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins
+
+  git clone https://github.com/ntnyq/omz-plugin-pnpm.git \
+    $PLUGINS_DIR/pnpm
 
   git clone https://github.com/zsh-users/zsh-autosuggestions \
     $PLUGINS_DIR/zsh-autosuggestions
