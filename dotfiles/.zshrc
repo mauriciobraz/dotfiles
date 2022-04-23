@@ -22,15 +22,10 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  asdf
   dotenv
   git
-  pnpm
   vscode
   yarn
-  zsh-autosuggestions
-  zsh-completions
-  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -41,6 +36,10 @@ source $ZSH/oh-my-zsh.sh
 #
 # It requires to install the commitizen-cli (npm i -g commitizen)
 alias gcz="git cz"
+
+# Load all the aliases inside .zsh folder.
+# The file name must follow the format "*.alias.zsh"
+source $HOME/.zsh/*.alias.zsh
 
 # Optional tools, you don't need to install them, if you don't want to.
 #
@@ -62,20 +61,20 @@ source $NVM_DIR/nvm.sh &>/dev/null || {
 
 source $NVM_DIR/bash_completion
 
-# Install all the external plugins used by oh-my-zsh.
-# TODO -> Migrate to zinit.
-function install-omz-plugins {
-  PLUGINS_DIR=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins
+# Plugin manager for ZSH
+# https://github.com/z-shell/zi
+export ZI_DIR="$HOME/.zi"
 
-  git clone https://github.com/ntnyq/omz-plugin-pnpm.git \
-    $PLUGINS_DIR/pnpm
-
-  git clone https://github.com/zsh-users/zsh-autosuggestions \
-    $PLUGINS_DIR/zsh-autosuggestions
-
-  git clone https://github.com/zsh-users/zsh-completions \
-    $PLUGINS_DIR/zsh-completions
-
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
-    $PLUGINS_DIR/zsh-syntax-highlighting
+source "$ZI_DIR/bin/zi.zsh" &>/dev/null || {
+  git clone https://github.com/z-shell/zi $ZI_DIR/bin
+  source "$ZI_DIR/bin/zi.zsh"
 }
+
+autoload -Uz _zi
+(( ${+_comps} )) && _comps[zi]=_zi
+zicompinit
+
+zi light-mode for \
+  zsh-users/zsh-autosuggestions \
+  zsh-users/zsh-completions \
+  zsh-users/zsh-syntax-highlighting
