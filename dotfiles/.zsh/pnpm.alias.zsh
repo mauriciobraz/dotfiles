@@ -1,6 +1,6 @@
 # Aliases for pnpm
 alias p="pnpm"
-alias px="pnpx"
+alias px="pnpm dlx"
 alias pi="pnpm init"
 
 # Packages
