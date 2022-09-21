@@ -1,26 +1,12 @@
-# Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# Install Oh My Zsh if it isn't already present
 if [ ! -d $ZSH ]; then
-  echo "Cloning Oh My Zsh..."
   git clone https://github.com/ohmyzsh/ohmyzsh.git $ZSH
-
-  echo "Oh My Zsh cloned, now reopen your terminal to finish the installation."
-  exit
+  echo "Oh My Zsh was successfully installed, restart the terminal to continue."
 fi
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(
   dotenv
   git
@@ -31,35 +17,8 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-# Aliases
-#
-# It requires to install the commitizen-cli (npm i -g commitizen)
-alias gcz="git cz"
-
-# Load all the aliases inside .zsh folder.
-# The file name must follow the format "*.alias.zsh"
-source $HOME/.zsh/*.alias.zsh
-
-# Optional tools, you don't need to install them, if you don't want to.
-#
-# To install Cargo/Rust, follow the instructions at the official website.
-# https://www.rust-lang.org/tools/install
-[ -s $HOME/.cargo/env ] && source $HOME/.cargo/env &>/dev/null
-
-# The following commands will install and load some important tools.
-# You can add more tools to this list as you wish.
-
-# Install and/or load Node Version Manager (NVM)
-# https://github.com/nvm-sh/nvm
-export NVM_DIR="$HOME/.nvm"
-
-source $NVM_DIR/nvm.sh &>/dev/null || {
-  git clone https://github.com/nvm-sh/nvm.git $NVM_DIR
-  source $NVM_DIR/nvm.sh
-}
-
-source $NVM_DIR/bash_completion
+# User configuration
+# User configuration
 
 # Plugin manager for ZSH
 # https://github.com/z-shell/zi
@@ -78,3 +37,62 @@ zi light-mode for \
   zsh-users/zsh-autosuggestions \
   zsh-users/zsh-completions \
   zsh-users/zsh-syntax-highlighting
+
+# Install and/or load Node Version Manager (NVM)
+# https://github.com/nvm-sh/nvm
+export NVM_DIR="$HOME/.nvm"
+
+source $NVM_DIR/nvm.sh &>/dev/null || {
+  git clone https://github.com/nvm-sh/nvm.git $NVM_DIR
+  source $NVM_DIR/nvm.sh
+}
+
+source $NVM_DIR/bash_completion
+
+# To install Cargo/Rust, follow the instructions at the official website.
+# https://www.rust-lang.org/tools/install
+[ -s $HOME/.cargo/env ] && source $HOME/.cargo/env &>/dev/null
+
+# It requires to install the commitizen-cli (pnpm add --global commitizen)
+alias gcz="git cz"
+
+# Aliases for pnpm
+# Aliases for pnpm
+# Aliases for pnpm
+
+alias p="pnpm"
+alias px="pnpm dlx"
+alias pi="pnpm init"
+
+# Packages
+alias pa="pnpm add"
+alias pad="pnpm add --save-dev"
+alias prm="pnpm remove"
+alias pin="pnpm install"
+alias pun="pnpm uninstall"
+alias pls="pnpm list"
+alias pout="pnpm outdated"
+alias pau="pnpm audit"
+alias pup="pnpm update"
+
+# Packages (Global)
+alias pga="pnpm add --global"
+alias pgls="pnpm list --global"
+alias pgrm="pnpm remove --global"
+alias pgu="pnpm update --global"
+
+# Scripts
+alias pd="pnpm run dev"
+alias pb="pnpm run build"
+alias pst="pnpm run start"
+alias psd="pnpm run start:dev"
+
+# Remove all node_modules folders recursively from a folder.
+# Defaults to the current directory.
+function purge-node-modules {
+  if [ ! -d $1 ]; then
+    echo "Error: The specified directory does not exist."
+  else
+    command find $1 -name "node_modules" -type d -prune -print | xargs du -chs
+  fi
+}

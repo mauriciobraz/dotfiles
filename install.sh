@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-DEPENDENCIES=(
+dependencies=(
   rsync
   git
   zsh
 )
 
-for dependency in "${DEPENDENCIES[@]}"; do
+for dependency in "${dependencies[@]}"; do
   command -v $dependency &>/dev/null || {
     echo "Dependency $dependency is not installed, please install it first."
     exit
@@ -17,7 +17,6 @@ cd "$(dirname "${BASH_SOURCE}")"
 
 install() {
   rsync -avh --no-perms dotfiles/.??* $HOME/
-
   echo "dotfiles installed."
 }
 
