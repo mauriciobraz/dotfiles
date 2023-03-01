@@ -1,5 +1,11 @@
 export ZSH="$(which zsh)"
 
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=1000
+SAVEHIST=1000
+
+setopt appendhistory
+
 # Loads Zinit or installs it if it's not installed.
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
@@ -25,7 +31,7 @@ zinit for \
   light-mode \
     zsh-users/zsh-autosuggestions \
     zsh-users/zsh-completions \
-    zsh-users/zsh-syntax-highlighting
+    zdharma-continuum/fast-syntax-highlighting
 
 zinit snippet OMZP::git
 zinit snippet OMZP::yarn
@@ -39,13 +45,26 @@ zinit wait lucid as"completion" for \
 zinit light ntnyq/omz-plugin-pnpm
 
 # User Configuration
-export PNPM_HOME="$HOME/.local/share/pnpm"
-export PATH="$PNPM_HOME:$PATH"
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
 
-## Load or install NVM.
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
+
+bindkey '^ ' autosuggest-accept
+
+alias gcz='git cz'
+
+## NVM
 export NVM_HOME="$HOME/.nvm"
 
 source $NVM_HOME/nvm.sh || {
   git clone https://github.com/nvm-sh/nvm.git $NVM_HOME &>/dev/null
   source $NVM_HOME/nvm.sh
 }
+
+## PNPM
+export PNPM_HOME="$HOME/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+
+source $HOME/.config/tabtab/zsh/__tabtab.zsh || true

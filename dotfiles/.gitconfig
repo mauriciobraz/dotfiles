@@ -1,0 +1,10 @@
+[user]
+	name = Maurício Braz Gonçalves
+	email = 82123955+mauriciobraz@users.noreply.github.com
+	signingkey = 73FD770A29E6A2C1
+
+[commit]
+	gpgsign = true
+
+[gpg]
+	program = gpg
