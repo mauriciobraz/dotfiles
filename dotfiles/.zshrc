@@ -1,98 +1,51 @@
-export ZSH="$HOME/.oh-my-zsh"
+export ZSH="$(which zsh)"
 
-if [ ! -d $ZSH ]; then
-  git clone https://github.com/ohmyzsh/ohmyzsh.git $ZSH
-  echo "Oh My Zsh was successfully installed, restart the terminal to continue."
-fi
+# Loads Zinit or installs it if it's not installed.
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
 
-ZSH_THEME="robbyrussell"
-
-plugins=(
-  dotenv
-  git
-  vscode
-  yarn
-)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-# User configuration
-# User configuration
-
-# Plugin manager for ZSH
-# https://github.com/z-shell/zi
-export ZI_DIR="$HOME/.zi"
-
-source "$ZI_DIR/bin/zi.zsh" &>/dev/null || {
-  git clone https://github.com/z-shell/zi $ZI_DIR/bin
-  source "$ZI_DIR/bin/zi.zsh"
-}
-
-autoload -Uz _zi
-(( ${+_comps} )) && _comps[zi]=_zi
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 zicompinit
 
-zi light-mode for \
-  zsh-users/zsh-autosuggestions \
-  zsh-users/zsh-completions \
-  zsh-users/zsh-syntax-highlighting
+## Load Pure Prompt theme for ZSH.
+zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
+zinit light sindresorhus/pure
 
-# Install and/or load Node Version Manager (NVM)
-# https://github.com/nvm-sh/nvm
-export NVM_DIR="$HOME/.nvm"
-
-source $NVM_DIR/nvm.sh &>/dev/null || {
-  git clone https://github.com/nvm-sh/nvm.git $NVM_DIR
-  source $NVM_DIR/nvm.sh
+## This is a workaround for the empty line this theme prints before the prompt.
+## https://github.com/sindresorhus/pure/issues/509#issuecomment-641001784
+print() {
+  [ 0 -eq $# -a "prompt_pure_precmd" = "${funcstack[-1]}" ] || builtin print "$@";
 }
 
-source $NVM_DIR/bash_completion
+## Load plugins and snippets.
+zinit for \
+  light-mode \
+    zsh-users/zsh-autosuggestions \
+    zsh-users/zsh-completions \
+    zsh-users/zsh-syntax-highlighting
 
-# To install Cargo/Rust, follow the instructions at the official website.
-# https://www.rust-lang.org/tools/install
-[ -s $HOME/.cargo/env ] && source $HOME/.cargo/env &>/dev/null
+zinit snippet OMZP::git
+zinit snippet OMZP::yarn
+zinit snippet OMZP::dotenv
+zinit snippet OMZP::vscode
 
-# It requires to install the commitizen-cli (pnpm add --global commitizen)
-alias gcz="git cz"
+zinit wait lucid as"completion" for \
+    OMZP::docker/_docker \
+    OMZP::docker-compose/_docker-compose
 
-# Aliases for pnpm
-# Aliases for pnpm
-# Aliases for pnpm
+zinit light ntnyq/omz-plugin-pnpm
 
-alias p="pnpm"
-alias px="pnpm dlx"
-alias pi="pnpm init"
+# User Configuration
+export PNPM_HOME="$HOME/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
 
-# Packages
-alias pa="pnpm add"
-alias pad="pnpm add --save-dev"
-alias prm="pnpm remove"
-alias pin="pnpm install"
-alias pun="pnpm uninstall"
-alias pls="pnpm list"
-alias pout="pnpm outdated"
-alias pau="pnpm audit"
-alias pup="pnpm update"
+## Load or install NVM.
+export NVM_HOME="$HOME/.nvm"
 
-# Packages (Global)
-alias pga="pnpm add --global"
-alias pgls="pnpm list --global"
-alias pgrm="pnpm remove --global"
-alias pgu="pnpm update --global"
-
-# Scripts
-alias pd="pnpm run dev"
-alias pb="pnpm run build"
-alias pst="pnpm run start"
-alias psd="pnpm run start:dev"
-
-# Remove all node_modules folders recursively from a folder.
-# Defaults to the current directory.
-function purge-node-modules {
-  if [ ! -d $1 ]; then
-    echo "Error: The specified directory does not exist."
-  else
-    command find $1 -name "node_modules" -type d -prune -print | xargs du -chs
-  fi
+source $NVM_HOME/nvm.sh || {
+  git clone https://github.com/nvm-sh/nvm.git $NVM_HOME &>/dev/null
+  source $NVM_HOME/nvm.sh
 }

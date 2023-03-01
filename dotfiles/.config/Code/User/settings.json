@@ -1,0 +1,129 @@
+{
+  // Window and Theme Settings
+  // Window and Theme Settings
+
+  "window.titleBarStyle": "native",
+  "window.menuBarVisibility": "toggle",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.colorTheme": "Adwaita Dark & default syntax highlighting & colorful status bar",
+
+  // Editor Settings
+  // Editor Settings
+
+  "editor.tabSize": 2,
+  "editor.renderLineHighlight": "none",
+  "editor.rulers": [80, 100, 120],
+
+  "editor.fontFamily": "'Fira Code', monospace, 'Droid Sans Fallback'",
+  "editor.fontLigatures": true,
+
+  "editor.trimAutoWhitespace": false,
+  "editor.wordBasedSuggestions": false,
+  "editor.inlineSuggest.enabled": true,
+  "editor.minimap.renderCharacters": false,
+
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.format": true
+  },
+
+  // File Settings
+  // File Settings
+
+  "files.trimFinalNewlines": true,
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.turbo": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/node_modules": true,
+    "**/build": true
+  },
+
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/build": true
+  },
+
+  "files.associations": {
+    "*.css": "tailwindcss",
+    "*.env*": "dotenv"
+  },
+
+  // Uncomment the following lines if using flatpak Visual Studio Code:
+  // "terminal.integrated.defaultProfile.linux": "zsh",
+  // "terminal.integrated.profiles.linux": {
+  //   "zsh": {
+  //     "path": "/usr/bin/flatpak-spawn",
+  //     "args": ["--host", "--env=TERM=xterm-256color", "zsh"]
+  //   }
+  // },
+
+  // Language Settings
+  // Language Settings
+
+  "typescript.updateImportsOnFileMove.enabled": "always",
+
+  "[json]": {
+    "editor.suggest.insertMode": "replace",
+    "editor.quickSuggestions": {
+      "strings": true
+    }
+  },
+
+  "[jsonc]": {
+    "editor.suggest.insertMode": "replace",
+    "editor.quickSuggestions": {
+      "strings": true
+    }
+  },
+
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
+
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  },
+
+  // Extension settings
+  // Extension settings
+
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "eslint.packageManager": "pnpm",
+
+  "material-icon-theme.folders.associations": {
+    "atoms": "redux-store",
+    "selectors": "redux-actions",
+    "tsconfig": "typescript",
+    "navigation": "routes",
+    "history": "resource"
+  },
+
+  "cSpell.caseSensitive": false,
+  "cSpell.language": "en,pt,pt-BR",
+  "cSpell.userWords": [
+    "adwaita",
+    "redhat",
+    "flatpak",
+    "tailwindcss",
+    "dbaeumer",
+    "esbenp",
+    "embuilder",
+    "discordx",
+    "akane"
+  ]
+}
