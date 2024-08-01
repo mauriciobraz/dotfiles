@@ -1,0 +1,62 @@
+#!/usr/bin/env zsh
+set -o shwordsplit
+set -o pipefail
+set -o nounset
+set -o errexit
+
+typeset -A COMMAND=(
+  [DIRNAME]=$(dirname $0)
+  [BASENAME]=$(basename $0)
+  [DESCRIPTION]="Nostrud do magna incididunt."
+)
+
+typeset -A FLAGS_DEFS=(
+  [0]="DEFINE_boolean 'help' false 'Show this message' 'h'"
+  [1]="DEFINE_string  'path' '.??*' 'Where look for files' 'p'"
+  [2]="DEFINE_boolean 'verbose' true 'Output verbose information' 'v'"
+)
+
+source ~/.zaliases/ansi.zsh
+
+# shFlags
+# shFlags
+# shFlags
+
+FLAGS_PARENT=$0
+source $(which shflags)
+
+for (( i = 0; i < ${#FLAGS_DEFS[@]}; i++ )); do
+  eval "${FLAGS_DEFS[$i]}"
+done
+
+FLAGS "$@" || exit 1
+eval set -- "${FLAGS_ARGV}"
+
+if [[ ${FLAGS_help} -eq ${FLAGS_TRUE} ]]; then
+  flags_help
+  exit 1
+fi
+
+# shBak
+# shBak
+# shBak
+
+vared -p "$(ansi::underlined_uri ${FLAGS_path}): Are you sure you want continue? [y/N] " \
+  -c REPLY && ansi::reset
+
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+  ansi::warning "Aborted"
+  exit 1
+fi
+
+find "${FLAGS_path}" -type f -not -name '*.bak' -exec zsh -c '
+  for FILE in "$@"; do
+    DATE=$(date +%d.%m.%H.%M.%S)
+    cp -a ${FILE} ${FILE}.${DATE}.bak
+
+    if [[ ${FLAGS_verbose} -eq ${FLAGS_TRUE} ]]; then
+      printf "%s → %s\n" $(ansi::underlined_uri "${FILE}") \
+                          $(ansi::underlined_uri "${FILE}.${DATE}.bak")
+    fi
+  done
+' zsh {} +

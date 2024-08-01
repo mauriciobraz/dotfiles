@@ -1,0 +1,108 @@
+{
+  // Workbench settings
+  "workbench.iconTheme": "material-icon-theme",
+
+  "workbench.startupEditor": "none",
+  "workbench.sideBar.location": "right",
+  "workbench.colorCustomizations": { "editorRuler.foreground": "#2c2c2c" },
+
+  // Window settings
+  "window.zoomLevel": 0,
+  "window.titleBarStyle": "custom",
+  "window.customTitleBarVisibility": "auto",
+
+  // Editor settings
+  "editor.tabSize": 2,
+  "editor.fontSize": 12,
+  "editor.rulers": [80, 100, 120],
+
+  "editor.trimAutoWhitespace": false,
+  "editor.inlineSuggest.enabled": true,
+  "editor.minimap.renderCharacters": false,
+
+  "editor.renderLineHighlight": "none",
+  "editor.wordBasedSuggestions": "off",
+
+  // Font settings
+  "editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+
+  "terminal.integrated.fontSize": 12,
+  "terminal.integrated.fontFamily": "'MesloLGM Nerd Font', Consolas, 'Courier New', monospace",
+
+  // Explorer settings
+  "explorer.sortOrder": "type",
+  "explorer.compactFolders": false,
+
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.enabled": false,
+
+  // Search settings
+  "search.useIgnoreFiles": true,
+  "search.useGlobalIgnoreFiles": true,
+
+  // Prettier settings
+  "prettier.semi": true,
+  "prettier.printWidth": 80,
+  "prettier.trailingComma": "all",
+  "prettier.quoteProps": "consistent",
+
+  // Files settings
+  "files.trimFinalNewlines": true,
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+
+  "files.exclude": {
+    "**/.hg": true,
+    "**/.svn": true,
+    "**/.git": true,
+
+    "**/.out": true,
+    "**/.next": true,
+    "**/.venv": true,
+    "**/.nuxt": true,
+    "**/.expo": true,
+    "**/.cache": true,
+    "**/coverage": true,
+    "**/node_modules": true,
+
+    "**/*.pyc": true,
+    "**/*.pyo": true,
+    "**/__pycache__": true,
+
+    "**/.DS_Store": true,
+    "**/.mypy_cache": true,
+    "**/.pytest_cache": true
+  },
+
+  // Extensions settings
+  "codeium.enableCodeLens": false,
+  "material-icon-theme.folders.associations": {
+    "User": "Client",
+    "Code": "Container",
+    "1Password": "Connection",
+
+    "ZAliases": "Project",
+    "ZFunctions": "Functions"
+  },
+
+  // Formatter settings
+  "editor.formatOnSave": true,
+  "editor.formatOnType": false,
+
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": { "quickfix.biome": "explicit" },
+
+  "[javascript]": { "editor.defaultFormatter": "biomejs.biome" },
+  "[typescript]": { "editor.defaultFormatter": "biomejs.biome" },
+
+  "[javascriptreact]": { "editor.defaultFormatter": "biomejs.biome" },
+  "[typescriptreact]": { "editor.defaultFormatter": "biomejs.biome" },
+
+  "[jsonc]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[json]": { "editor.defaultFormatter": "esbenp.prettier-vscode" }
+}
