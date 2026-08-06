@@ -1,0 +1,87 @@
+window-rule {
+    open-maximized true
+    clip-to-geometry true
+
+    geometry-corner-radius 0
+}
+
+window-rule {
+	match app-id="^dev.zed.Zed$"
+	match app-id="^kitty$"
+
+	tiled-state true
+
+	background-effect {
+        blur true
+        xray false
+    }
+}
+
+window-rule {
+    match app-id="dev.noctalia.Noctalia"
+    match app-id="nwg-displays"
+    match app-id="nwg-look"
+    match app-id="qt5ct|qt6ct"
+
+    match app-id="file-roller"
+    match app-id="flameshot"
+    match app-id="org.gnome.Calculator"
+    match app-id="org.gnome.FileRoller"
+    match app-id="org.gnome.Screenshot"
+    match app-id="org.gnome.font-viewer"
+    match app-id="qalculate-gtk"
+
+    match app-id="cpupower"
+    match app-id="org.gnome.PowerStats"
+    match app-id="power-profiles-daemon"
+    match app-id="rog-control-center"
+    match app-id="xfce4-power-manager-settings"
+
+    match app-id="blueman"
+    match app-id="blueman-manager"
+    match app-id="nm-applet"
+    match app-id="nm-connection-editor"
+
+    match app-id="easyeffects"
+    match app-id="jamesdsp"
+    match app-id="org.gnome.VolumeControl"
+    match app-id="org.pulseaudio.pavucontrol"
+    match app-id="pavucontrol"
+
+    match app-id="Hello"
+    match app-id="confirm"
+    match app-id="polkit-gnome-authentication-agent-1"
+    match app-id="polkit-kde-authentication-agent-1"
+    match app-id="xdg-desktop-portal-gnome"
+    match app-id="xdg-desktop-portal-gtk"
+    match app-id=r#"^pinentry.*$"#
+
+    open-floating true
+
+    default-column-width { fixed 1440; }
+    default-window-height { fixed 900; }
+}
+
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+
+    open-floating true
+    default-floating-position x=10 y=10 relative-to="top-right"
+}
+
+window-rule {
+   match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+
+   open-focused false
+   default-floating-position x=10 y=10 relative-to="bottom-right"
+}
+
+window-rule {
+    match app-id="^steam_app_3678970$"
+
+    tiled-state true
+    clip-to-geometry true
+    draw-border-with-background false
+
+    default-floating-position x=0 y=0 relative-to="bottom-right"
+}

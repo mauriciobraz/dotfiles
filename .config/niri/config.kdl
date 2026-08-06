@@ -1,0 +1,50 @@
+include "noctalia.kdl"
+include "monitors.kdl"
+
+include "extra/binds.kdl"
+include "extra/layer-rules.kdl"
+include "extra/window-rules.kdl"
+
+spawn-at-startup "fcitx5"
+spawn-at-startup "noctalia"
+
+prefer-no-csd
+
+layout {
+    gaps 10
+
+    background-color "transparent"
+    center-focused-column "never"
+
+    border {
+        off
+    }
+
+    focus-ring {
+        off
+    }
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+}
+
+environment {
+    GLFW_IM_MODULE "ibus"
+
+    GTK_IM_MODULE "fcitx"
+    QT_IM_MODULE "fcitx"
+    SDL_IM_MODULE "fcitx"
+    XMODIFIERS "@im=fcitx"
+
+    QT_QPA_PLATFORMTHEME "qt6ct"
+
+    QT_AUTO_SCREEN_SCALE_FACTOR "1"
+    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+}
+
+debug { honor-xdg-activation-with-invalid-serial; }
+overview { workspace-shadow { off; }; }
+hotkey-overlay { skip-at-startup; }

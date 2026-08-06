@@ -1,0 +1,13 @@
+layer-rule {
+    match namespace="^noctalia-(backdrop|wallpaper)$"
+    place-within-backdrop true
+}
+
+layer-rule {
+    match namespace="^noctalia-(notification|osd|panel|window-switcher)$"
+
+    background-effect {
+        blur true
+        xray false
+    }
+}
